@@ -19,6 +19,7 @@ function Weather() {
         return Math.round(tempKelvin - 273.15);
     }
 
+
     async function loadWeatherData() {
         const weatherAjax = await getWeather();
         console.log(weatherAjax.data);
@@ -31,7 +32,7 @@ function Weather() {
     }
     return (
         <div>
-            {weather ?
+            {weather != null ? 
                 <div>
                     <h1>Météo : {weather.name}</h1>
                     {/* <img alt= "" src="http://openweathermap.org/img/wn/10d@2x.png"></img> */}
@@ -39,6 +40,13 @@ function Weather() {
 
                     <p>{weather.weather[0].description}</p>
                     <p>{kelvinToCelsius(weather.main.temp)}C°</p>
+                    <p>{weather.main.humidity}%</p>
+                    <p>Vitesse du vent :{weather.wind.speed}</p>
+                    <p>Température ressenti : {kelvinToCelsius(weather.main.feels_like)}</p>
+                    <form method="GET">
+                    <input type="text" onchange="" />
+                    <input type="submit"value="Envoyer" />
+                    </form>
                 </div>
                 : <div>
                     <h1>Météo en attente de chargement</h1>
